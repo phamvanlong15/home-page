@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   check-bats-version:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -15,7 +15,7 @@ jobs:
       - run: npm run build
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - run: rsync -avzh --exclude='.git' -e 'ssh -i ~/.shh/id_rsa' --rsync-path='sudo rsync' ~/home-page/* ubuntu@18.191.82.204:/home/ubuntu/home-page
