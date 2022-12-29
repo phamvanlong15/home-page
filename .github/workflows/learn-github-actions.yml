@@ -1,6 +1,9 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
@@ -8,6 +11,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          node-version: '16.16.0'
+      - run: npm run build
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: rsync -avzh --exclude='.git' -e 'ssh -i ~/.shh/id_rsa' --rsync-path='sudo rsync' ~/home-page/* ubuntu@18.191.82.204:/home/ubuntu/home-page"
