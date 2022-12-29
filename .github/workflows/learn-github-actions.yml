@@ -1,5 +1,5 @@
 name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+run-name: ${{ github.actor }} GitHub Actions
 on:
   push:
     branches:
@@ -18,4 +18,4 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - run: rsync -avzh --exclude='.git' -e 'ssh -i ~/.shh/id_rsa' --rsync-path='sudo rsync' ~/home-page/* ubuntu@18.191.82.204:/home/ubuntu/home-page
+      - run: rsync -avzh --exclude='.git' -e 'ssh -i ~/.shh/id_rsa' --rsync-path='sudo rsync' ~/home-page/* ubuntu@18.191.82.204:/var/www/home-page
